@@ -17,7 +17,7 @@ module.exports = {
     'indent': [
       'error',
       2,
-      { 'SwitchCase': 1 }
+      { 'SwitchCase': 2 }
     ],
     'quotes': [
       'error',
@@ -34,10 +34,10 @@ module.exports = {
       'off'
     ],
     'no-unused-vars': [
-      'warn'
+      'error'
     ],
     'no-mixed-spaces-and-tabs': [
-      'warn'
+      'error'
     ]
   }
 };
