@@ -35,23 +35,10 @@ module.exports = function(collection) {
 			 * @param {any} json
 			 * @param {Context} ctx
 			 */
-		  		async entityChanged(type, json, ctx) {
+      async entityChanged(type, json, ctx) {
         ctx.broadcast(cacheCleanEventName);
       }
     },
-
-    async started() {
-      // Check the count of items in the DB. If it's empty,
-      // call the `seedDB` method of the service.
-      if (this.seedDB) {
-        const count = await this.adapter.count();
-        if (count == 0) {
-          this.logger.info(`The '${collection}' collection is empty. Seeding the collection...`);
-          await this.seedDB();
-          this.logger.info('Seeding is done. Number of records:', await this.adapter.count());
-        }
-      }
-    }
   };
 
   if (process.env.MONGO_URI) {
