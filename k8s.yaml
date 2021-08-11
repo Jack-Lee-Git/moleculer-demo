@@ -6,18 +6,11 @@ kind: ConfigMap
 metadata:
   name: common-env
 data:
-  NAMESPACE: ""
+  NAMESPACE: ''
   LOGLEVEL: info
   SERVICEDIR: services
   TRANSPORTER: nats://nats:4222
-  
-  
-  
-  
-  
-  
-  
-  
+
   MONGO_URI: mongodb://mongo/moleculer-demo
 
 ---
@@ -32,8 +25,8 @@ spec:
   selector:
     app: api
   ports:
-  - port: 3000
-    targetPort: 3000
+    - port: 3000
+      targetPort: 3000
 
 ---
 #########################################################
@@ -45,13 +38,13 @@ metadata:
   name: ingress
 spec:
   rules:
-  - host: moleculer-demo.127.0.0.1.nip.io
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: api
-          servicePort: 3000
+    - host: moleculer-demo.127.0.0.1.nip.io
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: api
+              servicePort: 3000
 
 ---
 #########################################################
@@ -72,14 +65,14 @@ spec:
         app: api
     spec:
       containers:
-      - name: api
-        image: moleculer-demo
-        envFrom:
-        - configMapRef:
-            name: common-env
-        env:
-          - name: SERVICES
-            value: api
+        - name: api
+          image: moleculer-demo
+          envFrom:
+            - configMapRef:
+                name: common-env
+          env:
+            - name: SERVICES
+              value: api
 
 ---
 #########################################################
@@ -100,14 +93,14 @@ spec:
         app: greeter
     spec:
       containers:
-      - name: greeter
-        image: moleculer-demo
-        envFrom:
-        - configMapRef:
-            name: common-env
-        env:
-          - name: SERVICES
-            value: greeter
+        - name: greeter
+          image: moleculer-demo
+          envFrom:
+            - configMapRef:
+                name: common-env
+          env:
+            - name: SERVICES
+              value: greeter
 
 ---
 #########################################################
@@ -128,14 +121,14 @@ spec:
         app: products
     spec:
       containers:
-      - name: products
-        image: moleculer-demo
-        envFrom:
-        - configMapRef:
-            name: common-env
-        env:
-          - name: SERVICES
-            value: products
+        - name: products
+          image: moleculer-demo
+          envFrom:
+            - configMapRef:
+                name: common-env
+          env:
+            - name: SERVICES
+              value: products
 
 ---
 #########################################################
@@ -204,8 +197,7 @@ spec:
     - port: 27017
       targetPort: 27017
   selector:
-    app: mongo          
-
+    app: mongo
 
 ---
 #########################################################
@@ -219,9 +211,9 @@ spec:
   selector:
     app: nats
   ports:
-  - port: 4222
-    name: nats
-    targetPort: 4222
+    - port: 4222
+      name: nats
+      targetPort: 4222
 
 ---
 #########################################################
@@ -244,14 +236,8 @@ spec:
         app: nats
     spec:
       containers:
-      - name: nats
-        image: nats
-        ports:
-        - containerPort: 4222
-          name: nats
-
-
-
-
-
-
+        - name: nats
+          image: nats
+          ports:
+            - containerPort: 4222
+              name: nats
