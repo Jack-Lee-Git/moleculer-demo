@@ -22,7 +22,6 @@ module.exports = {
 	 * Settings
 	 */
 	settings: {
-		// Available fields in the responses
 		rest: '/v1/users',
 		fields: [
 			'_id',
